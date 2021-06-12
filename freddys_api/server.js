@@ -15,13 +15,16 @@ app.use(express.json());
 app.use(cors());
 
 
+
 // middleware - API routes
 app.use('/api/v1/guitars', routes.guitars);
 app.use('/api/v1/auth', routes.auth);
 app.use('/api/v1/user', routes.user);
 
 
-
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+};
 // connection
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
